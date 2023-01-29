@@ -1,5 +1,8 @@
 import copy
+import time
+start = time.time()
 
+# preferences list for Super Group 1 teams
 super_group_1 = {
  'g1_t1':  ['g2_t1', 'g2_t5', 'g2_t3', 'g2_t4', 'g2_t6', 'g2_t2', 'g2_t8', 'g2_t7'],
  'g1_t2':  ['g2_t3', 'g2_t8', 'g2_t1', 'g2_t4', 'g2_t5', 'g2_t6', 'g2_t2', 'g2_t7'],
@@ -10,6 +13,7 @@ super_group_1 = {
  'g1_t7':  ['g2_t7', 'g2_t5', 'g2_t2', 'g2_t3', 'g2_t1', 'g2_t4', 'g2_t8', 'g2_t6'],
  'g1_t8':  ['g2_t1', 'g2_t5', 'g2_t8', 'g2_t6', 'g2_t3', 'g2_t2', 'g2_t7', 'g2_t4']}
 
+# preferences list for Super Group 2 teams
 super_group_2 = {
  'g2_t1':  ['g1_t2', 'g1_t6', 'g1_t7', 'g1_t1', 'g1_t4', 'g1_t5', 'g1_t3', 'g1_t8'],
  'g2_t2':  ['g1_t2', 'g1_t1', 'g1_t3', 'g1_t6', 'g1_t7', 'g1_t4', 'g1_t5', 'g1_t8'],
@@ -22,7 +26,6 @@ super_group_2 = {
 
 group1 = sorted(super_group_1.keys())
 group2 = sorted(super_group_2.keys())
-
 
 def check(engaged):
     inverseengaged = dict((v,k) for k,v in engaged.items())
@@ -80,10 +83,13 @@ def matchmaker():
 
 engaged = matchmaker()
 
+# Print all fixtures among teamss
 print('Fixtures:')
 print('  ' + ',\n  '.join('%s - %s' % couple
                           for couple in sorted(engaged.items())))
 print()
-print('Engagement stability check PASSED'
-      if check(engaged) else 'Engagement stability check FAILED')
+print('Matching stability check PASSED'
+      if check(engaged) else 'Matching stability check FAILED')
 
+end = time.time()
+print("Execution Time:", (end - start)*1000)
